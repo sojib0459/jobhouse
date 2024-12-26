@@ -7,25 +7,24 @@
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
             }
-        }, 1);
+        }, 100); // Adjusted timeout
     };
     spinner();
     
-    
-    // Initiate the wowjs
-    new WOW().init();
-
+    // Initiate WOW.js if available
+    if (typeof WOW !== 'undefined') {
+        new WOW().init();
+    }
 
     // Sticky Navbar
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
-            $('.sticky-top').css('top', '0px');
+            $('.sticky-top').css('transform', 'translateY(0)');
         } else {
-            $('.sticky-top').css('top', '-100px');
+            $('.sticky-top').css('transform', 'translateY(-100%)');
         }
     });
-    
-    
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -34,11 +33,15 @@
             $('.back-to-top').fadeOut('slow');
         }
     });
+
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate(
+            { scrollTop: 0 },
+            1500,
+            $.easing ? 'easeInOutExpo' : 'swing' // Fallback easing
+        );
         return false;
     });
-
 
     // Header carousel
     $(".header-carousel").owlCarousel({
@@ -47,13 +50,12 @@
         items: 1,
         dots: true,
         loop: true,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="bi bi-chevron-left"></i>',
             '<i class="bi bi-chevron-right"></i>'
         ]
     });
-
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
@@ -63,19 +65,18 @@
         margin: 24,
         dots: true,
         loop: true,
-        nav : false,
+        nav: false,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-            768:{
-                items:2
+            768: {
+                items: 2
             },
-            992:{
-                items:3
+            992: {
+                items: 3
             }
         }
     });
-    
-})(jQuery);
 
+})(jQuery);
