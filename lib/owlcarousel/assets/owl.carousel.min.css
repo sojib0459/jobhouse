@@ -4,7 +4,7 @@
  * Licensed under  ()
  */
 .owl-carousel,.owl-carousel .owl-item {
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; red
     position: relative
 }
 
